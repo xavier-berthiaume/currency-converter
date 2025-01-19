@@ -4,44 +4,44 @@
 <context>
     <name>MainWindow</name>
     <message>
-        <location filename="mainwindow.ui" line="14"/>
+        <location filename="../mainwindow.ui" line="32"/>
         <source>MainWindow</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="30"/>
-        <source>From &lt;currency&gt;</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="mainwindow.ui" line="60"/>
-        <location filename="mainwindow.ui" line="115"/>
+        <location filename="../mainwindow.ui" line="142"/>
+        <location filename="../mainwindow.ui" line="206"/>
         <source>Clear</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="88"/>
-        <source>To &lt;currency&gt;</source>
+        <location filename="../mainwindow.ui" line="111"/>
+        <source>From</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="136"/>
+        <location filename="../mainwindow.ui" line="178"/>
+        <source>To</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.ui" line="227"/>
         <source>Convert</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="153"/>
-        <source>Fichier</source>
+        <location filename="../mainwindow.ui" line="244"/>
+        <source>File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="163"/>
-        <source>Paramètres</source>
+        <location filename="../mainwindow.ui" line="253"/>
+        <source>Preferences</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="mainwindow.ui" line="168"/>
-        <source>Contact</source>
+        <location filename="../mainwindow.ui" line="258"/>
+        <source>About</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
