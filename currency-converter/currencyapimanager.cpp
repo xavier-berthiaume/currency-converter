@@ -35,7 +35,7 @@ QString CurrencyAPIManager::constructAPIUrl(const QString &date, const QString &
 {
     QString baseurl = "https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@{date}/{apiVersion}/{endpoint}";
     baseurl.replace("{date}", date);
-    baseurl.replace("{version}", version);
+    baseurl.replace("{apiVersion}", version);
     baseurl.replace("{endpoint}", endpoint);
 
     return baseurl;
@@ -71,7 +71,21 @@ void CurrencyAPIManager::handleNetworkReply(QNetworkReply *reply)
         }
         emit currenciesFetched(currencies);
     } else if (requestType == FetchExchangeRates) {
+        // Extract the base currency and date
+        QStringList keys = jsonobject.keys();
+        if (keys.size() < 2) {
+            qWarning() << "Unexpected JSON structure: insufficient keys";
+            reply->deleteLater();
+            return;
+        }
 
+        QString basecurrency = keys[1];
+        QJsonObject ratesObj = jsonobject[basecurrency].toObject();
+        QMap<QString, double> rates;
+        for (const QString &key : ratesObj.keys()) {
+            rates.insert(key, ratesObj[key].toDouble());
+        }
+        emit exchangeRatesFetched(basecurrency, rates);
     }
 
     reply->deleteLater();
