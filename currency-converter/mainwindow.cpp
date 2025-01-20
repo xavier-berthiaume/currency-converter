@@ -7,6 +7,19 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    QDoubleSpinBox *currency1spin = findChild<QDoubleSpinBox *>("currency1SpinBox");
+    QDoubleSpinBox *currency2spin = findChild<QDoubleSpinBox *>("currency2SpinBox");
+
+    currency1spin->setDecimals(2);
+    currency2spin->setDecimals(2);
+
+    currency1spin->setRange(0, 9e9);
+    currency2spin->setRange(0, 9e9);
+
+    currency1spin->setSingleStep(1.00);
+    currency2spin->setSingleStep(1.00);
+
+
     apiManager = new CurrencyAPIManager(this);
 
     // Connect network API signals
@@ -22,19 +35,29 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateJumbotron(const QString &leftLabel, const QString &rightLabel)
+void MainWindow::updateJumbotron(const QString &currency1, const double &value1, const QString &currency2, const double &value2)
 {
     QLabel *left = findChild<QLabel *>("currency1Label");
     QLabel *right = findChild<QLabel *>("currency2Label");
 
-    left->setText(leftLabel);
-    right->setText(rightLabel);
+    left->setText(QString::number(value1, 'f', 2) + " " + currency1);
+    right->setText(QString::number(value2, 'f', 2) + " " + currency2);
+}
+
+void MainWindow::updateCurrency2Spinbox(const double &value)
+{
+    QDoubleSpinBox *currency2spin = findChild<QDoubleSpinBox *>("currency2SpinBox");
+
+    currency2spin->setValue(value);
 }
 
 void MainWindow::updateCurrencies(const QMap<QString, QString> &currencies)
 {
     QComboBox *currency1combo = findChild<QComboBox *>("currency1ComboBox");
     QComboBox *currency2combo = findChild<QComboBox *>("currency2ComboBox");
+
+    currency1combo->blockSignals(true); // Block signals temporarily
+    currency2combo->blockSignals(true);
 
     currency1combo->clear();
     currency2combo->clear();
@@ -52,17 +75,36 @@ void MainWindow::updateCurrencies(const QMap<QString, QString> &currencies)
         }
 
         if (currencyCode == "usd") {
-            currency1combo->setCurrentIndex(index);
+            currency1combo->blockSignals(false);
+            currency2combo->blockSignals(false);
             currency2combo->setCurrentIndex(index);
+            currency1combo->setCurrentIndex(index);
+            currency1combo->blockSignals(true);
+            currency2combo->blockSignals(true);
         }
 
         index++;
     }
+
+    currency1combo->blockSignals(false);
+    currency2combo->blockSignals(false);
 }
 
 void MainWindow::updateExchange(const QString &baseCurrency, const QMap<QString, double> &rates)
 {
+    QComboBox *currency1combobox = findChild<QComboBox *>("currency1ComboBox");
+    QComboBox *currency2combobox = findChild<QComboBox *>("currency2ComboBox");
+    QDoubleSpinBox *currency1spinbox = findChild<QDoubleSpinBox *>("currency1SpinBox");
 
+    currentRates = rates;
+
+    updateCurrency2Spinbox(currency1spinbox->value() * currentRates[currency2combobox->currentData().toString()]);
+    updateJumbotron(
+        currency1combobox->currentData().toString(),
+        currency1spinbox->value(),
+        currency2combobox->currentData().toString(),
+        currency1spinbox->value() * currentRates[currency2combobox->currentData().toString()]
+        );
 }
 
 void MainWindow::networkError(const QString &error)
@@ -71,26 +113,39 @@ void MainWindow::networkError(const QString &error)
     QApplication::quit();
 }
 
-void MainWindow::on_currency1ComboBox_currentIndexChanged(int index)
+void MainWindow::on_currency1SpinBox_valueChanged(double arg1)
 {
+    QComboBox *currency1combobox = findChild<QComboBox *>("currency1ComboBox");
+    QComboBox *currency2combobox = findChild<QComboBox *>("currency2ComboBox");
 
+    updateCurrency2Spinbox(arg1 * currentRates[currency2combobox->currentData().toString()]);
+    updateJumbotron(
+        currency1combobox->currentData().toString(),
+        arg1,
+        currency2combobox->currentData().toString(),
+        arg1 * currentRates[currency2combobox->currentData().toString()]
+        );
 }
-
 
 void MainWindow::on_currency2ComboBox_currentIndexChanged(int index)
 {
+    QComboBox *currency1combobox = findChild<QComboBox *>("currency1ComboBox");
+    QComboBox *currency2combobox = findChild<QComboBox *>("currency2ComboBox");
+    QDoubleSpinBox *currency1spinbox = findChild<QDoubleSpinBox *>("currency1SpinBox");
 
+    updateCurrency2Spinbox(currency1spinbox->value() * currentRates[currency2combobox->currentData().toString()]);
+    updateJumbotron(
+        currency1combobox->currentData().toString(),
+        currency1spinbox->value(),
+        currency2combobox->currentData().toString(),
+        currency1spinbox->value() * currentRates[currency2combobox->currentData().toString()]
+        );
 }
 
 
-void MainWindow::on_currency1SpinBox_valueChanged(double arg1)
+void MainWindow::on_currency1ComboBox_currentIndexChanged(int index)
 {
-
-}
-
-
-void MainWindow::on_currency2SpinBox_valueChanged(double arg1)
-{
-
+    QComboBox *currency1 = findChild<QComboBox *>("currency1ComboBox");
+    apiManager->fetchCurrency(currency1->itemData(index).toString()); // We pass the data which is the currency code
 }
 

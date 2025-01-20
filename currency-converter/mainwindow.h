@@ -20,9 +20,11 @@ class MainWindow : public QMainWindow
 
     CurrencyAPIManager *apiManager;
 
-    void calculateExchange();
+    QMap<QString, double> currentRates;
 
-    void updateJumbotron(const QString &leftLabel, const QString &rightLabel);
+    void calculateExchange();
+    void updateJumbotron(const QString &currency1, const double &value1, const QString &currency2, const double &value2);
+    void updateCurrency2Spinbox(const double &value);
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -33,9 +35,8 @@ private slots:
     void updateExchange(const QString &baseCurrency, const QMap<QString, double> &rates);
 
     void networkError(const QString &error);
-    void on_currency1ComboBox_currentIndexChanged(int index);
     void on_currency2ComboBox_currentIndexChanged(int index);
+    void on_currency1ComboBox_currentIndexChanged(int index);
     void on_currency1SpinBox_valueChanged(double arg1);
-    void on_currency2SpinBox_valueChanged(double arg1);
 };
 #endif // MAINWINDOW_H

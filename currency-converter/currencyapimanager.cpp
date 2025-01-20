@@ -11,6 +11,9 @@ void CurrencyAPIManager::fetchCurrencies()
     QString url = constructAPIUrl(CurrencyAPIManager::apiLatestDate,
                                     CurrencyAPIManager::apiVersion,
                                     "currencies.json");
+
+    qDebug() << "Sending request to endpoint: " << url;
+
     const QUrl apiUrl(url);
     QNetworkRequest request(apiUrl);
 
@@ -23,6 +26,8 @@ void CurrencyAPIManager::fetchCurrency(const QString &currency)
     QString url = constructAPIUrl(CurrencyAPIManager::apiLatestDate,
                                   CurrencyAPIManager::apiVersion,
                                   "currencies/" + currency + ".json");
+
+    qDebug() << "Sending request to endpoint: " << url;
 
     const QUrl apiUrl(url);
     QNetworkRequest request(apiUrl);
@@ -69,6 +74,8 @@ void CurrencyAPIManager::handleNetworkReply(QNetworkReply *reply)
         for (auto currency = jsonobject.begin(); currency != jsonobject.end(); currency++) {
             currencies.insert(currency.key(), currency.value().toString());
         }
+
+        qDebug() << "Successfully fetched all currency tokens";
         emit currenciesFetched(currencies);
     } else if (requestType == FetchExchangeRates) {
         // Extract the base currency and date
@@ -79,12 +86,21 @@ void CurrencyAPIManager::handleNetworkReply(QNetworkReply *reply)
             return;
         }
 
-        QString basecurrency = keys[1];
+        QString basecurrency;
+        for (const QString &key : keys) {
+            if (key != "date") {
+                basecurrency = key;
+                break;
+            }
+        }
+
         QJsonObject ratesObj = jsonobject[basecurrency].toObject();
         QMap<QString, double> rates;
         for (const QString &key : ratesObj.keys()) {
             rates.insert(key, ratesObj[key].toDouble());
         }
+
+        qDebug() << "Successfully fetched data for currency token " << basecurrency;
         emit exchangeRatesFetched(basecurrency, rates);
     }
 
