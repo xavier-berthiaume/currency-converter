@@ -7,7 +7,7 @@ creditDialog::creditDialog(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Credits");
+    setWindowTitle(tr("Credits"));
 }
 
 creditDialog::~creditDialog()

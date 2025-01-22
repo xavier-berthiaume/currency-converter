@@ -2,6 +2,24 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="fr_CA">
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="../creditDialog.ui" line="26"/>
+        <source>Currency Converter</source>
+        <translation>Convertisseur de Monnai</translation>
+    </message>
+    <message>
+        <location filename="../creditDialog.ui" line="43"/>
+        <source>Written by Xavier Berthiaume in 2025</source>
+        <translation>Un logiciel de Xavier Berthiaume, 2025</translation>
+    </message>
+    <message>
+        <location filename="../creditDialog.ui" line="53"/>
+        <source>Conversion Rates and Currencies obtained from Exchange API, by Fawaz Ahmed. (https://github.com/fawazahmed0/exchange-api)</source>
+        <translation>Taux d&apos;échange et toutes autres données obtenus de Exchange API, fourni par Fawaz Ahmed. (https://github.com/fawazahmed0/exchange-api)</translation>
+    </message>
+</context>
+<context>
     <name>MainWindow</name>
     <message>
         <location filename="../mainwindow.ui" line="32"/>
@@ -15,10 +33,8 @@
         <translation>Chargement...</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="142"/>
-        <location filename="../mainwindow.ui" line="210"/>
         <source>Clear</source>
-        <translation>Effacer</translation>
+        <translation type="vanished">Effacer</translation>
     </message>
     <message>
         <location filename="../mainwindow.ui" line="111"/>
@@ -26,29 +42,37 @@
         <translation>De</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="178"/>
+        <location filename="../mainwindow.ui" line="156"/>
         <source>To</source>
         <translation>À</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="229"/>
+        <location filename="../mainwindow.ui" line="188"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="238"/>
+        <location filename="../mainwindow.ui" line="197"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="243"/>
+        <location filename="../mainwindow.ui" line="202"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="10"/>
+        <location filename="../mainwindow.cpp" line="12"/>
         <source>Currency-Converter</source>
         <translation>Convertisseur de Monnaie</translation>
+    </message>
+</context>
+<context>
+    <name>creditDialog</name>
+    <message>
+        <location filename="../creditdialog.cpp" line="10"/>
+        <source>Credits</source>
+        <translation>Attributions</translation>
     </message>
 </context>
 </TS>
