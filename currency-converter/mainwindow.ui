@@ -47,7 +47,7 @@
          </font>
         </property>
         <property name="text">
-         <string notr="true">1 CAD</string>
+         <string>Loading currency...</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -85,7 +85,7 @@
          </font>
         </property>
         <property name="text">
-         <string notr="true">1 USD</string>
+         <string>Loading currency...</string>
         </property>
        </widget>
       </item>

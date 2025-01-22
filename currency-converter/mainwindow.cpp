@@ -7,6 +7,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
+    setWindowTitle(tr("Currency-Converter"));
+
     QDoubleSpinBox *currency1spin = findChild<QDoubleSpinBox *>("currency1SpinBox");
     QDoubleSpinBox *currency2spin = findChild<QDoubleSpinBox *>("currency2SpinBox");
 
