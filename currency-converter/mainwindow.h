@@ -38,5 +38,6 @@ private slots:
     void on_currency2ComboBox_currentIndexChanged(int index);
     void on_currency1ComboBox_currentIndexChanged(int index);
     void on_currency1SpinBox_valueChanged(double arg1);
+    void on_actionContact_triggered();
 };
 #endif // MAINWINDOW_H

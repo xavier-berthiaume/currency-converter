@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include "creditdialog.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -149,5 +151,14 @@ void MainWindow::on_currency1ComboBox_currentIndexChanged(int index)
 {
     QComboBox *currency1 = findChild<QComboBox *>("currency1ComboBox");
     apiManager->fetchCurrency(currency1->itemData(index).toString()); // We pass the data which is the currency code
+}
+
+
+void MainWindow::on_actionContact_triggered()
+{
+    // Create the dialog that pops up the credits / contact info
+    creditDialog dialog(this);
+
+    dialog.exec();
 }
 

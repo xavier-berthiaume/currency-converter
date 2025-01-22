@@ -16,12 +16,17 @@ set(TS_FILES translation/currency-converter_fr_CA.ts)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
+
         mainwindow.h
+        mainwindow.cpp
         mainwindow.ui
 
         currencyapimanager.h
         currencyapimanager.cpp
+
+        creditdialog.h
+        creditdialog.cpp
+        creditDialog.ui
 
         ${TS_FILES}
 )
