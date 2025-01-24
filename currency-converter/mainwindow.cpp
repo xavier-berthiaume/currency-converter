@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include "settingsdialog.h"
 #include "creditdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -158,6 +159,14 @@ void MainWindow::on_actionContact_triggered()
 {
     // Create the dialog that pops up the credits / contact info
     creditDialog dialog(this);
+
+    dialog.exec();
+}
+
+
+void MainWindow::on_actionParametres_triggered()
+{
+    SettingsDialog dialog(this);
 
     dialog.exec();
 }
