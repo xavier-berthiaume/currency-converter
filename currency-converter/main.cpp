@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
+    /*
     qDebug() << "Checking current locales: " << QLocale::system().uiLanguages();
 
     QTranslator translator;
@@ -21,6 +22,7 @@ int main(int argc, char *argv[])
         }
     }
     qDebug() << "Current translator set on program start: " << translator.filePath();
+    */
 
     MainWindow w;
     w.show();

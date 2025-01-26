@@ -1,6 +1,7 @@
 #include <QDir>
 #include <QDebug>
 #include <QComboBox>
+#include <QPushButton>
 
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
@@ -12,6 +13,12 @@ SettingsDialog::SettingsDialog(QWidget *parent)
     ui->setupUi(this);
 
     populateLanguages();
+
+    QDialogButtonBox *buttons = findChild<QDialogButtonBox *>("buttonBox");
+    QPushButton *applyButton = buttons->button(QDialogButtonBox::Apply); // For some reason the apply button doesn't emit the accepted signal, so manually connecting
+
+    qDebug() << "Connecting close button functionality: " << connect(buttons, &QDialogButtonBox::rejected, this, &SettingsDialog::onCloseButtonClicked);
+    qDebug() << "Connecting save button functionality: " << connect(applyButton, &QPushButton::clicked, this, &SettingsDialog::onSaveButtonClicked);
 }
 
 SettingsDialog::~SettingsDialog()
@@ -76,4 +83,16 @@ QString SettingsDialog::getSelectedLanguage()
     QComboBox *lcombo = findChild<QComboBox *>("languageComboBox");
 
     return "";
+}
+
+void SettingsDialog::onCloseButtonClicked()
+{
+    qDebug() << "Close button clicked";
+    this->reject();
+}
+
+void SettingsDialog::onSaveButtonClicked()
+{
+    qDebug() << "Apply button clicked";
+    this->accept();
 }

@@ -62,9 +62,22 @@
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="12"/>
+        <location filename="../mainwindow.cpp" line="13"/>
         <source>Currency-Converter</source>
         <translation>Convertisseur de Monnaie</translation>
+    </message>
+</context>
+<context>
+    <name>SettingsDialog</name>
+    <message>
+        <location filename="../settingsdialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../settingsdialog.ui" line="22"/>
+        <source>Language:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>

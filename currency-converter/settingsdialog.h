@@ -19,6 +19,11 @@ public:
 
     QString getSelectedLanguage();
 
+private slots:
+    void onCloseButtonClicked();
+
+    void onSaveButtonClicked();
+
 private:
     Ui::SettingsDialog *ui;
 };
