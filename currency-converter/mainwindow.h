@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <QComboBox>
+#include <QTranslator>
 
 #include "currencyapimanager.h"
 
@@ -22,9 +23,15 @@ class MainWindow : public QMainWindow
 
     QMap<QString, double> currentRates;
 
+    QTranslator m_translator;
+    QString m_currentLang;
+    QString m_langPath;
+
     void calculateExchange();
     void updateJumbotron(const QString &currency1, const double &value1, const QString &currency2, const double &value2);
     void updateCurrency2Spinbox(const double &value);
+
+    void changeLanguage(const QString &language);
 
 public:
     MainWindow(QWidget *parent = nullptr);

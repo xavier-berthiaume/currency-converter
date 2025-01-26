@@ -1,16 +1,31 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
+#include <QDir>
+#include <QMessageBox>
+
 #include "settingsdialog.h"
 #include "creditdialog.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , m_currentLang("fr_CA")
+    , m_langPath(QDir(QCoreApplication::applicationDirPath()).filePath("translations"))
 {
     ui->setupUi(this);
 
     setWindowTitle(tr("Currency-Converter"));
+
+    if (!m_translator.load(QString("currency-converter_%1").arg(m_currentLang), m_langPath)) {
+        qDebug() << "Failed to load the translation file:"
+                 << m_langPath + "/currency-converter_" + m_currentLang + ".qm";
+    } else {
+        qApp->installTranslator(&m_translator);
+        ui->retranslateUi(this);
+        qDebug() << "Loaded translation file:"
+                 << m_langPath + "/currency-converter_" + m_currentLang + ".qm";
+    }
 
     QDoubleSpinBox *currency1spin = findChild<QDoubleSpinBox *>("currency1SpinBox");
     QDoubleSpinBox *currency2spin = findChild<QDoubleSpinBox *>("currency2SpinBox");
@@ -54,6 +69,30 @@ void MainWindow::updateCurrency2Spinbox(const double &value)
     QDoubleSpinBox *currency2spin = findChild<QDoubleSpinBox *>("currency2SpinBox");
 
     currency2spin->setValue(value);
+}
+
+void MainWindow::changeLanguage(const QString &language)
+{
+    if (language == m_currentLang) {
+        return; // Already loaded
+    }
+
+    // Remove the current translator
+    qApp->removeTranslator(&m_translator);
+
+    // Load the new translation file
+    if (m_translator.load(QString("currency-converter_%1").arg(language), m_langPath)) {
+        qApp->installTranslator(&m_translator);
+        m_currentLang = language;
+
+        // Reapply translations
+        ui->retranslateUi(this);
+
+        qDebug() << "Language changed to:" << language;
+    } else {
+        QMessageBox::warning(this, tr("Error"), tr("Failed to load language: %1").arg(language));
+        qDebug() << "Failed to load translation file for" << language;
+    }
 }
 
 void MainWindow::updateCurrencies(const QMap<QString, QString> &currencies)
@@ -166,8 +205,10 @@ void MainWindow::on_actionContact_triggered()
 
 void MainWindow::on_actionParametres_triggered()
 {
-    SettingsDialog dialog(this);
+    SettingsDialog dialog(m_currentLang, this);
 
-    dialog.exec();
+    if (dialog.exec() == QDialog::Accepted) {
+        changeLanguage(dialog.getSelectedLanguage());
+    }
 }
 

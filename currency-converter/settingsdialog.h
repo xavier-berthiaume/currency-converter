@@ -11,10 +11,12 @@ class SettingsDialog : public QDialog
 {
     Q_OBJECT
 
+    const QString &currentLang;
+
     void populateLanguages();
 
 public:
-    explicit SettingsDialog(QWidget *parent = nullptr);
+    explicit SettingsDialog(const QString &currentLang, QWidget *parent = nullptr);
     ~SettingsDialog();
 
     QString getSelectedLanguage();

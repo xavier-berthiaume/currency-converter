@@ -6,8 +6,9 @@
 #include "settingsdialog.h"
 #include "ui_settingsdialog.h"
 
-SettingsDialog::SettingsDialog(QWidget *parent)
-    : QDialog(parent)
+SettingsDialog::SettingsDialog(const QString &currentLang, QWidget *parent)
+    : currentLang(currentLang)
+    , QDialog(parent)
     , ui(new Ui::SettingsDialog)
 {
     ui->setupUi(this);
@@ -75,6 +76,12 @@ void SettingsDialog::populateLanguages()
 
         qDebug() << "Adding to lanugage options " << languageName << " With data code " << languageCode;
         lcombo->addItem(languageName, languageCode + "_" + localeCode);
+        if (languageCode + "_" + localeCode == currentLang) {
+            int index = lcombo->count() - 1;
+            lcombo->setCurrentIndex(index);
+
+            qDebug() << "Set the current index of the language combobox to " << index;
+        }
     }
 }
 
@@ -82,7 +89,7 @@ QString SettingsDialog::getSelectedLanguage()
 {
     QComboBox *lcombo = findChild<QComboBox *>("languageComboBox");
 
-    return "";
+    return lcombo->currentData().toString();
 }
 
 void SettingsDialog::onCloseButtonClicked()
