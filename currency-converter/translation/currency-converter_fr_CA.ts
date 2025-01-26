@@ -28,7 +28,7 @@
     </message>
     <message>
         <location filename="../mainwindow.ui" line="50"/>
-        <location filename="../mainwindow.ui" line="88"/>
+        <location filename="../mainwindow.ui" line="117"/>
         <source>Loading currency...</source>
         <translation>Chargement...</translation>
     </message>
@@ -37,47 +37,57 @@
         <translation type="vanished">Effacer</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="111"/>
+        <location filename="../mainwindow.ui" line="140"/>
         <source>From</source>
         <translation>De</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="156"/>
+        <location filename="../mainwindow.ui" line="185"/>
         <source>To</source>
         <translation>À</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="188"/>
+        <location filename="../mainwindow.ui" line="217"/>
         <source>File</source>
         <translation>Fichier</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="197"/>
+        <location filename="../mainwindow.ui" line="226"/>
         <source>Preferences</source>
         <translation>Préférences</translation>
     </message>
     <message>
-        <location filename="../mainwindow.ui" line="202"/>
+        <location filename="../mainwindow.ui" line="231"/>
         <source>About</source>
         <translation>À propos</translation>
     </message>
     <message>
-        <location filename="../mainwindow.cpp" line="13"/>
+        <location filename="../mainwindow.cpp" line="18"/>
         <source>Currency-Converter</source>
         <translation>Convertisseur de Monnaie</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="93"/>
+        <source>Error</source>
+        <translation>Échec</translation>
+    </message>
+    <message>
+        <location filename="../mainwindow.cpp" line="93"/>
+        <source>Failed to load language: %1</source>
+        <translation>Impossible de charger la langue: %1</translation>
     </message>
 </context>
 <context>
     <name>SettingsDialog</name>
     <message>
         <location filename="../settingsdialog.ui" line="14"/>
-        <source>Dialog</source>
-        <translation type="unfinished"></translation>
+        <source>Settings</source>
+        <translation>Paramétres</translation>
     </message>
     <message>
         <location filename="../settingsdialog.ui" line="22"/>
         <source>Language:</source>
-        <translation type="unfinished"></translation>
+        <translation>Langue:</translation>
     </message>
 </context>
 <context>

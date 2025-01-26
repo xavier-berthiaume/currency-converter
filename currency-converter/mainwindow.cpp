@@ -60,8 +60,8 @@ void MainWindow::updateJumbotron(const QString &currency1, const double &value1,
     QLabel *left = findChild<QLabel *>("currency1Label");
     QLabel *right = findChild<QLabel *>("currency2Label");
 
-    left->setText(QString::number(value1, 'f', 2) + " " + currency1);
-    right->setText(QString::number(value2, 'f', 2) + " " + currency2);
+    left->setText(QString::number(value1, 'f', 2) + " " + currency1.toUpper());
+    right->setText(QString::number(value2, 'f', 2) + " " + currency2.toUpper());
 }
 
 void MainWindow::updateCurrency2Spinbox(const double &value)
@@ -97,6 +97,19 @@ void MainWindow::changeLanguage(const QString &language)
 
 void MainWindow::updateCurrencies(const QMap<QString, QString> &currencies)
 {
+    qDebug() << "Removing loading labels";
+
+    QLabel *currency1Loading = findChild<QLabel *>("currency1Loading");
+    QLabel *currency2Loading = findChild<QLabel *>("currency2Loading");
+
+    if (currency1Loading) {
+        currency1Loading->hide();
+    }
+
+    if (currency2Loading) {
+        currency2Loading->hide();
+    }
+
     QComboBox *currency1combo = findChild<QComboBox *>("currency1ComboBox");
     QComboBox *currency2combo = findChild<QComboBox *>("currency2ComboBox");
 
@@ -186,7 +199,6 @@ void MainWindow::on_currency2ComboBox_currentIndexChanged(int index)
         );
 }
 
-
 void MainWindow::on_currency1ComboBox_currentIndexChanged(int index)
 {
     QComboBox *currency1 = findChild<QComboBox *>("currency1ComboBox");
@@ -211,4 +223,3 @@ void MainWindow::on_actionParametres_triggered()
         changeLanguage(dialog.getSelectedLanguage());
     }
 }
-
