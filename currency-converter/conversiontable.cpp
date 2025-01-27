@@ -35,12 +35,16 @@ void conversionTable::updateExchange(const QString &baseCurrency, const QMap<QSt
         QStandardItem *exchangeItem = new QStandardItem(QString::number(exchangeRate, 'f', 2));
         QStandardItem *convertedItem = new QStandardItem(QString::number(convertedValue, 'f', 2));
 
+        exchangeItem->setData(exchangeRate, Qt::UserRole);
+        convertedItem->setData(convertedValue, Qt::UserRole);
+
         QList<QStandardItem *> row = {currencyItem, exchangeItem, convertedItem};
         model->appendRow(row);
     }
 
     tableView->setModel(model);
 
+    tableView->setSortingEnabled(true);
     tableView->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     tableView->verticalHeader()->setVisible(false);
     tableView->setSelectionMode(QAbstractItemView::NoSelection);
