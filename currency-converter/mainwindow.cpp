@@ -39,6 +39,9 @@ MainWindow::MainWindow(QWidget *parent)
     currency1spin->setSingleStep(1.00);
     currency2spin->setSingleStep(1.00);
 
+    m_conversionTable = new conversionTable(currency1spin->value(), this);
+    findChild<QWidget *>("centralwidget")->layout()->addWidget(m_conversionTable);
+    // this->layout()->addWidget(table);
 
     apiManager = new CurrencyAPIManager(this);
 
@@ -46,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(apiManager, &CurrencyAPIManager::currenciesFetched, this, &MainWindow::updateCurrencies);
     connect(apiManager, &CurrencyAPIManager::exchangeRatesFetched, this, &MainWindow::updateExchange);
     connect(apiManager, &CurrencyAPIManager::errorFetchingCurrencies, this, &MainWindow::networkError);
+    connect(apiManager, &CurrencyAPIManager::exchangeRatesFetched, m_conversionTable, &conversionTable::updateExchange);
+    connect(currency1spin, &QDoubleSpinBox::valueChanged, m_conversionTable, &conversionTable::updateCurrencyValue);
 
     apiManager->fetchCurrencies();
 }

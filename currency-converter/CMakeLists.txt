@@ -33,6 +33,10 @@ set(PROJECT_SOURCES
         settingsdialog.cpp
         settingsdialog.ui
 
+        conversiontable.h
+        conversiontable.cpp
+        conversiontable.ui
+
         ${TS_FILES}
 )
 

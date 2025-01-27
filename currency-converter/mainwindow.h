@@ -6,6 +6,7 @@
 #include <QTranslator>
 
 #include "currencyapimanager.h"
+#include "conversiontable.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -19,6 +20,7 @@ class MainWindow : public QMainWindow
 
     Ui::MainWindow *ui;
 
+    conversionTable *m_conversionTable;
     CurrencyAPIManager *apiManager;
 
     QMap<QString, double> currentRates;
