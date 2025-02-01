@@ -18,7 +18,7 @@ void conversionTable::updateExchange(const QString &baseCurrency, const QMap<QSt
 
     // Set up the title label
     QLabel *title = findChild<QLabel *>("titleLabel");
-    title->setText(tr("Conversion Table for %1").arg(baseCurrency));
+    title->setText(tr("Conversion Table for %1").arg(baseCurrency.toUpper()));
 
     // Clear the table and populate it once you figure out how it works
     QTableView *tableView = findChild<QTableView *>("tableView");
