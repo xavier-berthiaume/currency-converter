@@ -11,6 +11,19 @@ conversionTable::conversionTable(double currencyValue, QWidget *parent)
     ui->setupUi(this);
 }
 
+void conversionTable::retranslateUi()
+{
+    QLabel *title = findChild<QLabel *>("titleLabel");
+    title->setText(tr("Conversion Table for %1").arg(currentBaseCurrency.toUpper()));
+
+    // Retranslate the table headers
+    QTableView *tableView = findChild<QTableView *>("tableView");
+    QStandardItemModel *model = qobject_cast<QStandardItemModel *>(tableView->model());
+    if (model) {
+        model->setHorizontalHeaderLabels({tr("Currency"), tr("Exchange Rate"), tr("Converted Value")});
+    }
+}
+
 void conversionTable::updateExchange(const QString &baseCurrency, const QMap<QString, double> &rates)
 {
     currentBaseCurrency = baseCurrency;

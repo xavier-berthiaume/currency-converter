@@ -70,6 +70,8 @@ void SettingsDialog::populateLanguages()
             } else {
                 languageName = "Français";
             }
+        } else if (languageCode == "nl") {
+            languageName = "Dutch (Netherlands)";
         } else {
             languageName = QString("%1 (%2)").arg(languageCode.toUpper(), localeCode.toUpper());
         }

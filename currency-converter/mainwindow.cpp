@@ -92,6 +92,7 @@ void MainWindow::changeLanguage(const QString &language)
 
         // Reapply translations
         ui->retranslateUi(this);
+        m_conversionTable->retranslateUi(); // Retranslate because it's a custom widget
 
         qDebug() << "Language changed to:" << language;
     } else {

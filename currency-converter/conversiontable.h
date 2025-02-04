@@ -19,6 +19,8 @@ public:
     explicit conversionTable(double initialValue, QWidget *parent = nullptr);
     ~conversionTable();
 
+    void retranslateUi();
+
 public slots:
     void updateExchange(const QString &baseCurrency, const QMap<QString, double> &rates);
     void updateCurrencyValue(double arg1);

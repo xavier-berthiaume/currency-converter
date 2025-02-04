@@ -13,7 +13,8 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets LinguistTools Network)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets LinguistTools Network)
 
 set(TS_FILES translation/currency-converter_fr_CA.ts
-    translation/currency-converter_en_CA.ts)
+    translation/currency-converter_en_CA.ts
+    translation/currency-converter_nl_NL.ts)
 
 set(PROJECT_SOURCES
         main.cpp
